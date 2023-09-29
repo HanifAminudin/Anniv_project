@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ASHMAA'ULIA SAFITRI MUNNA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;700&family=Lugrasimo&family=Tangerine:wght@700&display=swap" rel="stylesheet" />
+    <script src="countdown/simplyCountdown.min.js"></script>
+    <style>
+      :root {
+        --bg: #fbeeac;
+        --coklat: #e9b384;
+        --shadow: 0 2px 2px #a8a196;
+      }
+      body {
+        font-size: 1.5rem;
+        font-family: "Edu SA Beginner", cursive;
+        background-image: url(images/bglove.jpeg);
+      }
+      #hero ::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* background-image: url(img/ayaka.jpg); */
+        z-index: -1;
+        background-position: center;
+        background-size: cover;
+      }
+      #hero {
+        position: relative;
+        min-height: 100vh;
+      }
+      #hero h1 {
+        /* font-family: "Tangerine", cursive; */
+        font-size: 3.2rem;
+        font-weight: bold;
+      }
+      #hero h4 {
+        font-size: 2.5rem;
+      }
+      #hero p {
+        font-size: 2.5rem;
+      }
+      #hero #undangan {
+        color: blue;
+        background-color: var(--coklat);
+      }
+      #hero #undangan:hover {
+        color: var(--coklat);
+        background-color: blue;
+      }
+      .simply-countdown {
+        overflow: hidden;
+        display: table;
+      }
+      .simply-countdown > .simply-section {
+        font-weight: bold;
+        width: 50px;
+        height: 50px;
+        padding: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        margin: 15px;
+        background: #c03232;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        border-radius: 50%;
+      }
+
+      .simply-countdown > .simply-section .simply-amount,
+      .simply-countdown > .simply-section .simply-word {
+        display: block;
+        text-align: center;
+      }
+
+      @media (max-width: 992px) {
+        html {
+          font-size: 75%;
+        }
+        .simply-countdown > .simply-section {
+          padding: 45px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        html {
+          font-size: 65%;
+        }
+        .simply-countdown > .simply-section {
+          padding: 40px;
+          margin: 10px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        html {
+          font-size: 60%;
+        }
+        .simply-countdown > .simply-section {
+          padding: 35px;
+          margin: 7px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <section id="hero" class="w-100 h-100 p-5 mx-auto text-center d-flex justify-content-center align-items-center">
+      <main>
+        <h4><b>KEPADA SAYANGKUU <3<3</b></h4>
+        <h1><strong>Ashmaa'Ulia Safitri Munna</strong></h1>
+        <p><b>nanti ini di klik yaa hehehe</b></p>
+        <div class="simply-countdown w-100 h-100 p-1 mx-auto text-center d-flex justify-content-center align-items-center"></div>
+        <a href="lanjutan.html"><button id="undangan" style="font-weight: bold" disabled>Klik sini yaa</button></a>
+      </main>
+    </section>
+    <script>
+      simplyCountdown(".simply-countdown", {
+        year: 2023, // required
+        month: 9, // required
+        day: 23, // required
+        hours: 0, // Default is 0 [0-23] integer
+        minutes: 0, // Default is 0 [0-59] integer
+        seconds: 1, // Default is 0 [0-59] integer
+        words: {
+          //words displayed into the countdown
+          days: { singular: "Hari", plural: "Hari" },
+          hours: { singular: "Jam", plural: "Jam" },
+          minutes: { singular: "Menit", plural: "Menit" },
+          seconds: { singular: "Detik", plural: "Detik" },
+        },
+        onEnd: function () {
+          // Fungsi ini akan dipanggil ketika countdown selesai
+          // Aktifkan tombol "Lanjutan" dengan menghapus atribut 'disabled'
+          document.getElementById("undangan").removeAttribute("disabled");
+        },
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>

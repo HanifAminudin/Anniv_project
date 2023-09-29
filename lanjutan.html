@@ -1,0 +1,356 @@
+<html>
+  <head>
+    <title>Moleskine Notebook with jQuery Booklet</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet" />
+    <title>ASHMAA'ULIA SAFITRI MUNNA</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="booklet/jquery.easing.1.3.js" type="text/javascript"></script>
+    <script src="booklet/jquery.booklet.1.1.0.min.js" type="text/javascript"></script>
+
+    <link href="booklet/jquery.booklet.1.1.0.css" type="text/css" rel="stylesheet" media="screen" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        margin: 0;
+        background-image: url(images/bglove.jpeg);
+        color: #444;
+        font-size: 12px;
+        color: #333;
+        font-family: "Oswald", sans-serif;
+        display: flex; /* Menggunakan flexbox untuk mengatur konten di tengah secara vertikal dan horizontal */
+        justify-content: center; /* Mengatur konten di tengah secara horizontal */
+        align-items: center; /* Mengatur konten di tengah secara vertikal */
+        height: 100vh; /* Memberikan tinggi sejajar dengan tinggi layar */
+      }
+
+      .booklet {
+        width: 900px;
+        height: 607px;
+        position: relative;
+        margin: 20px auto 10px;
+        -moz-box-shadow: 0px 0px 1px #fff;
+        -webkit-box-shadow: 0px 0px 1px #fff;
+        box-shadow: 0px 0px 1px #fff;
+        -moz-border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+      }
+      .booklet .b-wrap-left {
+        background: #fff url(images/left_bg.jpg) no-repeat top left;
+        -webkit-border-top-left-radius: 10px;
+        -webkit-border-bottom-left-radius: 10px;
+        -moz-border-radius-topleft: 10px;
+        -moz-border-radius-bottomleft: 10px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+      .booklet .b-wrap-right {
+        background: #efefef url(images/right_bg.jpg) no-repeat top left;
+        -webkit-border-top-right-radius: 10px;
+        -webkit-border-bottom-right-radius: 10px;
+        -moz-border-radius-topright: 10px;
+        -moz-border-radius-bottomright: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+      .booklet .b-counter {
+        bottom: 10px;
+        position: absolute;
+        display: block;
+        width: 90%;
+        height: 20px;
+        border-top: 1px solid #ddd;
+        color: #222;
+        text-align: center;
+        font-size: 12px;
+        padding: 5px 0 0;
+        background: transparent;
+        -moz-box-shadow: 0px -1px 1px #fff;
+        -webkit-box-shadow: 0px -1px 1px #fff;
+        box-shadow: 0px -1px 1px #fff;
+        opacity: 0.8;
+      }
+      .book_wrapper {
+        margin: 0 auto;
+        padding-top: 50px;
+        width: 905px;
+        height: 540px;
+        position: relative;
+        background: transparent url(images/bg.png) no-repeat 9px 27px;
+      }
+      .book_wrapper h1 {
+        color: rgb(255, 0, 0);
+        margin: 5px 5px 5px 15px;
+        font-size: 24px;
+        padding-bottom: 7px;
+        text-transform: uppercase;
+        font-weight: normal;
+      }
+      .book_wrapper p {
+        font-size: 15px;
+        margin: 5px 5px 5px 15px;
+      }
+      .book_wrapper a.article,
+      .book_wrapper a.demo {
+        background: transparent url(images/circle.png) no-repeat 50% 0px;
+        display: block;
+        width: 95px;
+        height: 41px;
+        text-decoration: none;
+        outline: none;
+        font-size: 16px;
+        color: #555;
+        float: left;
+        line-height: 41px;
+        padding-left: 47px;
+      }
+      .book_wrapper a.demo {
+        margin-left: 50px;
+      }
+      .book_wrapper a.article:hover,
+      .book_wrapper a.demo:hover {
+        background-position: 50% -41px;
+        color: #13386a;
+      }
+      .book_wrapper img {
+        margin: 10px 0px 5px 35px;
+        width: 300px;
+        padding: 4px;
+        border: 1px solid #ddd;
+        -moz-box-shadow: 1px 1px 1px #fff;
+        -webkit-box-shadow: 1px 1px 1px #fff;
+        box-shadow: 1px 1px 1px #fff;
+      }
+      .booklet .b-wrap-right img {
+        border: 1px solid #e6e3c2;
+      }
+      a#next_page_button,
+      a#prev_page_button {
+        display: none;
+        position: absolute;
+        width: 41px;
+        height: 40px;
+        cursor: pointer;
+        margin-top: -20px;
+        top: 50%;
+        background: transparent url(images/buttons.png) no-repeat 0px -40px;
+      }
+      a#prev_page_button {
+        left: -30px;
+      }
+      a#next_page_button {
+        right: -30px;
+        background-position: -41px -40px;
+      }
+      a#next_page_button:hover {
+        background-position: -41px 0px;
+      }
+      a#prev_page_button:hover {
+        background-position: 0px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <br /><br /><br /><br /><br />
+
+    <div class="book_wrapper">
+      <a id="next_page_button"></a>
+      <a id="prev_page_button"></a>
+
+      <div id="mybook" style="display: none">
+        <div class="b-load">
+          <div>
+            <img src="images/1.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini waktu awalan kita chatan yang akhirnya bikin chatan terus terusan</h1>
+          </div>
+          <div>
+            <img src="images/2.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>Terus ayang ke kontrakan dan kita keluar cari akrilik</h1>
+          </div>
+          <div>
+            <img src="images/3.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>abis itu aku di tawarin jadi mc oprek.tapi aku bilang kalau mc pasangannya ayangg aku baru mau.terus karena nopal acc waktu itu aku ajakin ayang deh buat jadi mc oprek hehehe</h1>
+          </div>
+          <div>
+            <img src="images/4.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>Ini waktu pertama kali ayang curhat ke aku dan aku seneng banget dulu. karena ayang udah mau curhat bke aku yg artinya aku udah selangkah lebih deket ke ayang</h1>
+          </div>
+          <div>
+            <img src="images/5.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini waktu pertama kali aku ngasih pap ke ayang karena kehujanan terus neduh di bawah flyover</h1>
+          </div>
+          <div>
+            <img src="images/6.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini ayang bales pap juga waktu momen ayang mati listrik di mbah dan waktu itu kita mau latian mc</h1>
+          </div>
+          <div>
+            <img src="images/7.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini waktu aku mintol ayang nyariin kawul hehehe ayangg mau bantu aku nyariin</h1>
+          </div>
+          <div>
+            <img src="images/8.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini ayang ucapin aku ultah. karena ada momennya aku berusaha ngajakin ayang nonton berduaa dan ayangg mau</h1>
+          </div>
+          <div>
+            <img src="images/9.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini waktu pertama kali aku kerumah ayang buat jemput ayangg nonton</h1>
+          </div>
+          <div>
+            <img src="images/10.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini ayangg curhat ke aku yg kedua kalinya akuu kasihan ke ayangg karena ayang di gituin apalagi waktu udah jadian aku baca dm ayangg sama itu orang jadi makin sakit hati ayangg pernah di gituin</h1>
+          </div>
+          <div>
+            <img src="images/11.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini aku seneng banget karena ayang beraniin diri buat nyari tau dan keluar dari hubungan yg selama itu nyakitin ayangg</h1>
+          </div>
+          <div>
+            <img src="images/12.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini waktu kita mau berangkat makrab bareng hehehehe</h1>
+          </div>
+          <div>
+            <img src="images/13.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini waktu aku ngajak keluar ayang beli kabel charger biar ayang bisa ngecharger karena punyaku type c sedangkan ayang micro</h1>
+          </div>
+          <div>
+            <img src="images/14.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini ayang dulu pernah post ini aku inget bangett, dan aku juga ngerasa seneng chat kita ayang post hehehehe, aku ngerasa kita lebih deket waktu ayangg post itu</h1>
+          </div>
+          <div>
+            <img src="images/15.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini waktu aku nyoba confess ke ayangg, heheheheh waktu itu baru berani nyoba di wa</h1>
+          </div>
+          <div>
+            <img src="images/16.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini juga pembahasan lanjutan dari yg aku confess</h1>
+          </div>
+          <div>
+            <img src="images/17.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini waktu pertama kali ayangg nyanyiin akuu, akuu seneng bangett hehehehe pertama kali di nyanyiin ayangg</h1>
+          </div>
+          <div>
+            <img src="images/18.jpg" alt="" style="width: 80%; height: 90%" />
+          </div>
+          <div>
+            <h1>ini waktu aku abis ngajak ayangg ketemu dan confess langsung di minum semarang dan ayangg mau nerima akuu, senengg bangett di terima ayangg</h1>
+          </div>
+          <div>
+            <img src="images/makrab.jpg" alt="" />
+          </div>
+          <div>
+            <h1>ini foto waktu kita makrab dan waktu itu aku sering nempel sama ayangg hehehehe</h1>
+          </div>
+          <div>
+            <img src="images/cakra.jpg" alt="" />
+          </div>
+          <div>
+            <h1>ini foto waktu kita cakra dan kita udahh jadian jugaa</h1>
+          </div>
+          <div>
+            <img src="images/nonton pertama kali.jpg" alt="" />
+          </div>
+          <div>
+            <h1>ini waktu kita nonton bareng pertama kali dan ayangg nangis waktu itu</h1>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <a href="lanjutan1.html"><button id="undangan" style="cursor: pointer; font-weight: bold">Klik sini lagi yaa</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(function () {
+        var $mybook = $("#mybook");
+        var $bttn_next = $("#next_page_button");
+        var $bttn_prev = $("#prev_page_button");
+        var $loading = $("#loading");
+        var $mybook_images = $mybook.find("img");
+        var cnt_images = $mybook_images.length;
+        var loaded = 0;
+
+        $mybook_images.each(function () {
+          var $img = $(this);
+          var source = $img.attr("src");
+          $("<img/>")
+            .load(function () {
+              ++loaded;
+              if (loaded == cnt_images) {
+                $loading.hide();
+                $bttn_next.show();
+                $bttn_prev.show();
+                $mybook.show().booklet({
+                  name: null, //
+                  width: 800, //
+                  height: 500, //
+                  speed: 600, //
+                  direction: "LTR", //
+                  //
+                  next: $bttn_next, //
+                  prev: $bttn_prev, //
+                });
+                Cufon.refresh();
+              }
+            })
+            .attr("src", source);
+        });
+      });
+    </script>
+  </body>
+</html>
